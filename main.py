@@ -19,6 +19,9 @@ except:
 
 
 
+url="https://data.tycg.gov.tw/api/v1/rest/datastore/0c7bcfbf-b151-4411-b888-9ff685ff7a75?format=json"  #仔細看下面限制100筆
+url="https://data.tycg.gov.tw/api/v1/rest/datastore/0c7bcfbf-b151-4411-b888-9ff685ff7a75?format=json&offset=100" # 由第幾筆開始
+url="https://data.tycg.gov.tw/api/v1/rest/datastore/0c7bcfbf-b151-4411-b888-9ff685ff7a75?format=json&limit=800" # 最大資料量800筆
 url="https://data.tycg.gov.tw/api/v1/rest/datastore/0c7bcfbf-b151-4411-b888-9ff685ff7a75?format=json&limit=6000" # 最大資料量6000筆
 
 req=httplib.Request(url)
@@ -54,6 +57,33 @@ plt.rcParams['font.sans-serif'] = ['SimSun'] # 步驟一（替換sans-serif字�
 plt.rcParams['axes.unicode_minus'] = False  # 步驟二（解決座標軸負數的負號顯示問題）
 
 
+"""
+{"_id":2,
+"項次":"2",
+"清運序":"2",
+"行政區":"蘆竹區",
+"清運路線名稱":"山腳區1線",
+"清運點名稱":"山林路一段與武聖街口",
+"一般垃圾清運時間":"星期一二四五六:17:00",
+"廚餘回收清運時間":"星期一二四五六:17:00",
+"資源回收清運時間":"星期一二四五六:17:00"}
+
+
+"""
+"""
+RubbishCarTable
+
+id  A_I   (int)
+項次 Item
+清運序 Preface
+行政區 District
+清運路線名稱 ClearRoute
+清運點名稱 SpotName
+一般垃圾清運時間 GeneralGarbageTime
+廚餘回收清運時間 FoodWasteTime
+資源回收清運時間 GarbageRecycleTime
+
+"""
 
 db = MySQLdb.connect(host="127.0.0.1", user="admin", passwd="admin", db="mydatabase")
 cursor = db.cursor()
@@ -86,5 +116,6 @@ for x in range(int(len(data["result"]["records"]))):
 """
 參考資料:
 https://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=88bdf93f-1b8d-4e8d-ade5-16670d909f38&rid=0c7bcfbf-b151-4411-b888-9ff685ff7a75
+
 
 """
